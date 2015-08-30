@@ -17,8 +17,8 @@ elif [ "$1" == "zi" ]
 then
     if [ "$2" == "start" ]
     then
-        # Za doradu
         git pull
+        git request-pull master https://AionCode/Parmecium.git aca
     elif [ "$2" == "commit" ]
     then
         git add *
