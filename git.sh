@@ -7,7 +7,7 @@ then
         git fetch upstream
         git checkout master
         git merge upstream/master
-    elif [ "$2" == "commit"]
+    elif [ "$2" == "commit" ]
     then
         git add *
         git commit -m "$3" -a
