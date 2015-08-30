@@ -6,7 +6,7 @@ then
     then
         git fetch upstream
         git checkout master
-        git merge upstream/master
+        git merge upstream/aca
     elif [ "$2" == "commit" ]
     then
         git add *
