@@ -10,8 +10,8 @@ Game::Game(void)
 {
     //x = 100;
     //y = 100;
-    width = 640;
-    height = 480;
+    width = 840;
+    height = 680;
     caption = "";
     isRunning = true;
     fps = 10;
