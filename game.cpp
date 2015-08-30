@@ -10,8 +10,8 @@ Game::Game(void)
 {
     //x = 100;
     //y = 100;
-    width = 640;
-    height = 480;
+    width = 840;
+    height = 680;
     caption = "";
     isRunning = true;
     fps = 10;
@@ -45,7 +45,8 @@ void Game::init(void)
 
     // Specific the clear color
     //glClearColor(1, 1, 1, 1);   // White color
-    glClearColor(1, 0, 1, 1);   // Puprple color
+    //glClearColor(1, 0, 1, 1);   // Puprple color
+    glClearColor(0, 0, 0, 1);   // Black color
 
     // What portion of the screen we will display
     glViewport(0, 0, this->width, this->height);
