@@ -87,7 +87,7 @@ void Game::events(SDL_Event event)
             isRunning = false;
         if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
             isRunning = false;
-        
+
         switch(event.type)
         {
             case SDL_KEYDOWN:
@@ -132,7 +132,7 @@ void Game::mainLoop(void)
 {
     // Initialization
     this->init();
-    
+
     // Main loop
     std::cout << "Main loop is started\n";
     while(isRunning)
@@ -141,14 +141,16 @@ void Game::mainLoop(void)
         this->events(event);
 
         // Logic
-        player->move();
+        player->move(this->width, this->height);
 
         // Render
         glClear(GL_COLOR_BUFFER_BIT);
         glPushMatrix();
         glOrtho(0, this->width, 0, this->height, -1, 1);    // Set the matrix
         // Begin render
+
         player->render();
+
         // End render
         glPopMatrix();
         SDL_GL_SwapBuffers();

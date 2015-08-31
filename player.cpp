@@ -11,8 +11,8 @@ Player::Player(void)
 {
     this->x = 0.0;
     this->y = 0.0;
-    this->width = 84.0;
-    this->height = 100.0;
+    this->width = 54.0;
+    this->height = 70.0;
     this->speed = 10.0;
     this->helth = 3.0;
     this->isAlive = true;
@@ -31,7 +31,7 @@ Player::~Player(void)
     // Delete player
 }
 
-void Player::move(void)
+void Player::move(float winWidth, float winHeight)
 {
     if(this->moveState.down)
     {
@@ -53,6 +53,15 @@ void Player::move(void)
         this->x -= this->speed;
         this->angle = PLAYER_ANGLE_LEFT;
     }
+
+    if(this->x < 0)
+        this->x = 0;
+    else if(this->y < 0)
+        this->y = 0;
+    else if(this->x + this->width > winWidth)
+        this->x = winWidth - this->width;
+    else if(this->y + this->height > winHeight)
+        this->y = winHeight - this->height;
 }
 
 unsigned int Player::loadModel(SDL_Surface *image, SDL_Rect imageRect)
