@@ -53,7 +53,7 @@ private:
 public:
     Player(void);
     ~Player(void);
-    void move(void);
+    void move(float winWidth, float winHeight);
     void changeMoveState(int type, int side);
     unsigned int loadModel(SDL_Surface *image, SDL_Rect imageRect);
     void loadTexture(void);
