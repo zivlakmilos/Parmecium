@@ -17,48 +17,44 @@
 #define PLAYER_ANGLE_UP     8
 #define PLAYER_ANGLE_LEFT   9
 
-struct PlayerTexture
-{
-    unsigned int d[3];
-    unsigned int r[3];
-    unsigned int u[3];
-    unsigned int l[3];
-};
-
-struct PlayerMove
+typedef struct sPlayerMove
 {
     bool down;
     bool right;
     bool up;
     bool left;
-};
+} PlayerMove;
+
+typedef struct sPlayerTexture
+{
+    unsigned int down;
+    unsigned int right;
+    unsigned int up;
+    unsigned int left;
+} PlayerTexture;
 
 class Player
 {
-private:
-    float x;
-    float y;
-    float width;
-    float height;
-    float speed;
-    float helth;
-    bool isAlive;
-    char *name;
-    int angle;
-    int textureState;
-    int textureStateStep;
-    PlayerMove moveState;
-    PlayerTexture texture;
+    private:
+        float x;
+        float y;
+        float width;
+        float height;
+        float speed;
+        float helth;
+        int angle;
+        PlayerMove moveState;
+        PlayerTexture texture;
 
-public:
-    Player(void);
-    ~Player(void);
-    void move(float winWidth, float winHeight);
-    void changeMoveState(int type, int side);
-    unsigned int loadModel(SDL_Surface *image, SDL_Rect imageRect);
-    void loadTexture(void);
-    //void colision(void);
-    void render(void);
+    public:
+        Player(void);
+        ~Player(void);
+        void move(void);
+        void changeMoveState(int type, int size);
+        unsigned int loadModel(SDL_Surface *image, SDL_Rect imageRect);
+        void loadTexture(void);
+        void render(void);
+        void collision(float width, float height);
 };
 
 #endif  // PLAYER_H

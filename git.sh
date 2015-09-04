@@ -18,7 +18,8 @@ then
     if [ "$2" == "start" ]
     then
         git pull
-        git request-pull master https://AionCode/Parmecium.git aca
+        #git request-pull master https://github.com/AionCode/Parmecium.git aca
+        git request-pull master https://github.com/zivlakmilos/Parmecium.git aca
     elif [ "$2" == "commit" ]
     then
         git add *
