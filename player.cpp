@@ -30,12 +30,12 @@ void Player::move(void)
     else if(this->moveState.up)
     {
         this->y += this->speed;
-        this->angle = PLAYER_ANGLE_RIGHT;
+        this->angle = PLAYER_ANGLE_UP;
     }
     if(this->moveState.left)
     {
         this->x -= this->speed;
-        this->angle = PLAYER_ANGLE_RIGHT;
+        this->angle = PLAYER_ANGLE_LEFT;
     }
     else if(this->moveState.right)
     {
@@ -121,9 +121,11 @@ unsigned int Player::loadModel(SDL_Surface *image, SDL_Rect imageRect)
 void Player::loadTexture(void)
 {
     SDL_Surface *image = IMG_Load("data/player.png");
+    //SDL_Surface *image = IMG_Load("data/foka2.png");
     SDL_DisplayFormatAlpha(image);
     SDL_Rect imageRect;
 
+    /*
     imageRect.x = 0;
     imageRect.y = 0;
     imageRect.w = 200.0;
@@ -136,6 +138,31 @@ void Player::loadTexture(void)
     this->texture.down = this->loadModel(image, imageRect);
     imageRect.x += imageRect.w;
     this->texture.up = this->loadModel(image, imageRect);
+    */
+
+    /*
+    imageRect.x = 0;
+    imageRect.y = 0;
+    imageRect.w = 300;
+    imageRect.h = 300;
+    this->texture.down = this->loadModel(image, imageRect);
+    */
+
+    imageRect.x = 0;
+    imageRect.y = 0;
+    imageRect.w = 300;
+    imageRect.h = 300;
+
+    image = IMG_Load("data/foka.png");
+    this->texture.down = this->loadModel(image, imageRect);
+    image = IMG_Load("data/foka2.png");
+    this->texture.right = this->loadModel(image, imageRect);
+    image = IMG_Load("data/foka3.png");
+    this->texture.left = this->loadModel(image, imageRect);
+    image = IMG_Load("data/foka4.png");
+    this->texture.up = this->loadModel(image, imageRect);
+
+    SDL_FreeSurface(image);
 }
 
 // Render player
