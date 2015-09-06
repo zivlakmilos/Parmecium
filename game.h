@@ -6,7 +6,7 @@ class Game
     private:
         float width;
         float height;
-        char *caption;
+        std::string caption;
         bool isRunning;
         int fps;
         SDL_Event event;

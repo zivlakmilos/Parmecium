@@ -33,7 +33,7 @@ void Game::init(void)
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     // Caption of the window
-    SDL_WM_SetCaption(this->caption, NULL);
+    SDL_WM_SetCaption(this->caption.c_str(), NULL);
 
     // Size of window
     SDL_SetVideoMode(this->width, this->height, 32, SDL_OPENGL);
