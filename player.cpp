@@ -5,9 +5,9 @@ Player::Player(void)
 {
     this->x = 0.0;
     this->y = 0.0;
-    this->width = 64.0;
-    this->height = 80.0;
-    this->speed = 3.0;
+    this->width = 74.0;
+    this->height = 90.0;
+    this->speed = 4.0;
     this->helth = 3.0;
     this->moveState.down = false;
     this->moveState.right = false;
