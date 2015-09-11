@@ -39,7 +39,8 @@ void Game::init(void)
     SDL_SetVideoMode(this->width, this->height, 32, SDL_OPENGL);
 
     // Specific the clear color
-    glClearColor(0, 0, 0, 1);   // Black color
+    //glClearColor(0, 0, 0, 1);   // Black color
+    glClearColor(0.1, 0.01, 0.01, 1);
 
     // What portion of the screen we will display
     glViewport(0, 0, this->width, this->height);
