@@ -7,4 +7,4 @@
 #include <SDL/SDL_image.h>
 #include <iostream>
 
-#endif // MAIN_H
+#endif  // MAIN_H
