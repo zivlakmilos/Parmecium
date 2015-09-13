@@ -1,15 +1,16 @@
 #include "main.h"
 #include "player.h"
+#include "splash.h"
 #include "game.h"
 
 Game::Game(void)
 {
-    width = 840;
-    height = 680;
-    caption = "Parmecium";
-    isRunning = true;
-    fps = 10;
-    player = new Player();
+    this->width = 840;
+    this->height = 680;
+    this->caption = "Parmecium";
+    this->isRunning = true;
+    this->fps = 10;
+    this->player = new Player();
 }
 
 Game::~Game(void)
@@ -64,6 +65,13 @@ void Game::init(void)
     // Initialize texture
     player->loadTexture();
     std::cout << "texture is initialize\n";
+}
+
+void Game::splash(void)
+{
+    Splash *splash = new Splash(this->width, this->height);
+    splash->show();
+    delete splash;
 }
 
 void Game::events(SDL_Event event)
@@ -122,6 +130,9 @@ void Game::mainLoop(void)
 {
     // Initialization
     this->init();
+
+    // Splash screen
+    this->splash();
 
     // Main loop
     std::cout << "Main loop is started\n";

@@ -1,5 +1,6 @@
 #include "main.h"
 #include "player.h"
+#include "splash.h"
 #include "game.h"
 
 int main(int argc, char *argv[])

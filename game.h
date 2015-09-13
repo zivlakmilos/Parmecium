@@ -14,6 +14,7 @@ class Game
 
         void events(SDL_Event event);
         void init(void);
+        void splash(void);
 
     public:
         Game(void);

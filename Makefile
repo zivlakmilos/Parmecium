@@ -1,8 +1,8 @@
 all: linux windows
 
 
-linux: main.o game.o player.o
-	g++ -o parmecium main.o game.o player.o -lSDLmain -lSDL -lGL -lSDL_image
+linux: main.o game.o player.o splash.o
+	g++ -o parmecium main.o game.o player.o splash.o -lSDLmain -lSDL -lGL -lSDL_image
 
 main.o: main.cpp
 	g++ -c -o main.o main.cpp
@@ -12,6 +12,9 @@ game.o: game.cpp
 
 player.o: player.cpp
 	g++ -c -o player.o player.cpp
+
+splash.o: splash.cpp
+	g++ -c -o splash.o splash.cpp
 
 
 windows: mainW.o gameW.o playerW.o
