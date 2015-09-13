@@ -1,7 +1,3 @@
-/*
-    main
-*/
-
 #include "main.h"
 #include "player.h"
 #include "game.h"

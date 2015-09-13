@@ -1,18 +1,12 @@
-/*
-    Game class
-*/
-
 #include "main.h"
 #include "player.h"
 #include "game.h"
 
 Game::Game(void)
 {
-    //x = 100;
-    //y = 100;
     width = 840;
     height = 680;
-    caption = "";
+    caption = "Parmecium";
     isRunning = true;
     fps = 10;
     player = new Player();
@@ -20,7 +14,8 @@ Game::Game(void)
 
 Game::~Game(void)
 {
-    delete player;
+    // Free
+    SDL_Quit();
 }
 
 void Game::init(void)
@@ -38,20 +33,19 @@ void Game::init(void)
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     // Caption of the window
-    SDL_WM_SetCaption(this->caption, NULL);
+    SDL_WM_SetCaption(this->caption.c_str(), NULL);
 
     // Size of window
     SDL_SetVideoMode(this->width, this->height, 32, SDL_OPENGL);
 
     // Specific the clear color
-    //glClearColor(1, 1, 1, 1);   // White color
-    //glClearColor(1, 0, 1, 1);   // Puprple color
-    glClearColor(0, 0, 0, 1);   // Black color
+    //glClearColor(0, 0, 0, 1);   // Black color
+    glClearColor(0.05, 0, 0, 1);
 
     // What portion of the screen we will display
     glViewport(0, 0, this->width, this->height);
 
-    // Shader model
+    // Shadermodel
     glShadeModel(GL_SMOOTH);
 
     // 2D rendering
@@ -67,17 +61,10 @@ void Game::init(void)
 
     std::cout << "OpenGL is initialize\n";
 
-    // Initizle texture
+    // Initialize texture
     player->loadTexture();
-    std::cout << "Texture is initialize\n";
+    std::cout << "texture is initialize\n";
 }
-
-/*
-void free(void)
-{
-    delete player;
-}
-*/
 
 void Game::events(SDL_Event event)
 {
@@ -85,9 +72,9 @@ void Game::events(SDL_Event event)
     {
         if(event.type == SDL_QUIT)
             isRunning = false;
-        if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
-            isRunning = false;
-        
+        //if(event.type = SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
+            //isRunning = false;
+
         switch(event.type)
         {
             case SDL_KEYDOWN:
@@ -95,35 +82,38 @@ void Game::events(SDL_Event event)
                 {
                     case SDLK_DOWN:
                         player->changeMoveState(PLAYER_MOVE_ADD, PLAYER_MOVE_DOWN);
-                    break;
+                        break;
                     case SDLK_RIGHT:
                         player->changeMoveState(PLAYER_MOVE_ADD, PLAYER_MOVE_RIGHT);
-                    break;
+                        break;
                     case SDLK_UP:
                         player->changeMoveState(PLAYER_MOVE_ADD, PLAYER_MOVE_UP);
-                    break;
+                        break;
                     case SDLK_LEFT:
                         player->changeMoveState(PLAYER_MOVE_ADD, PLAYER_MOVE_LEFT);
-                    break;
+                        break;
+                    case SDLK_ESCAPE:
+                        isRunning = false;
+                        break;
                 }
-            break;
+                break;
             case SDL_KEYUP:
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_DOWN:
                         player->changeMoveState(PLAYER_MOVE_DELETE, PLAYER_MOVE_DOWN);
-                    break;
+                        break;
                     case SDLK_RIGHT:
                         player->changeMoveState(PLAYER_MOVE_DELETE, PLAYER_MOVE_RIGHT);
-                    break;
+                        break;
                     case SDLK_UP:
                         player->changeMoveState(PLAYER_MOVE_DELETE, PLAYER_MOVE_UP);
-                    break;
+                        break;
                     case SDLK_LEFT:
                         player->changeMoveState(PLAYER_MOVE_DELETE, PLAYER_MOVE_LEFT);
-                    break;
+                        break;
                 }
-            break;
+                break;
         }
     }
 }
@@ -132,16 +122,17 @@ void Game::mainLoop(void)
 {
     // Initialization
     this->init();
-    
+
     // Main loop
     std::cout << "Main loop is started\n";
     while(isRunning)
     {
-        // Hadler event
+        // Handle events
         this->events(event);
 
         // Logic
         player->move();
+        player->collision(this->width, this->height);
 
         // Render
         glClear(GL_COLOR_BUFFER_BIT);
@@ -154,7 +145,5 @@ void Game::mainLoop(void)
         SDL_GL_SwapBuffers();
         SDL_Delay(fps);
     }
-
-    // Free
-    SDL_Quit();
+    std::cout << "Main loop end\n";
 }
