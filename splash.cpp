@@ -9,7 +9,7 @@ Splash::Splash(float wWidth, float wHeight)
     this->wHeight = wHeight;
     this->x = wWidth / 2 - this->width / 2;
     this->y = wHeight / 2 - this->height / 2;
-    this->time = 1000;
+    this->time = 2000;
     loadTexture();
 }
 
