@@ -2,6 +2,10 @@
 
 if [ "$1" == "aca" ]
 then
+    if [ "$2" == "init" ]
+    then
+        git remote add upstream https://github.com/zivlakmilos/Parmecium.git
+    fi
     if [ "$2" == "start" ]
     then
         git fetch upstream
