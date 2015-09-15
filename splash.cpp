@@ -10,7 +10,7 @@ Splash::Splash(float wWidth, float wHeight)
     this->x = wWidth / 2 - this->width / 2;
     this->y = wHeight / 2 - this->height / 2;
     this->time = 4000;
-    this->music = NULL;
+    //this->music = NULL;
     loadTexture();
 }
 
@@ -101,5 +101,5 @@ void Splash::show(void)
     glPopMatrix();
     SDL_GL_SwapBuffers();
     SDL_Delay(time);
-    Mix_FreeMusic(music);
+    //Mix_FreeMusic(music);
 }
