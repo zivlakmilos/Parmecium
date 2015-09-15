@@ -11,6 +11,7 @@ class Game
         int fps;
         SDL_Event event;
         Player *player;
+        Mix_Music *music;
 
         void events(SDL_Event event);
         void init(void);

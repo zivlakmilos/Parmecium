@@ -9,7 +9,8 @@ Splash::Splash(float wWidth, float wHeight)
     this->wHeight = wHeight;
     this->x = wWidth / 2 - this->width / 2;
     this->y = wHeight / 2 - this->height / 2;
-    this->time = 2000;
+    this->time = 4000;
+    this->music = NULL;
     loadTexture();
 }
 
@@ -67,6 +68,10 @@ unsigned int Splash::loadModel(SDL_Surface *image, SDL_Rect imageRect)
 
 void Splash::show(void)
 {
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+    music = Mix_LoadMUS("data/muzika/music.wav");
+    Mix_PlayMusic(music, -1);
+
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
     glOrtho(0, this->wWidth, 0, this->wHeight, -1, 1);
@@ -96,4 +101,5 @@ void Splash::show(void)
     glPopMatrix();
     SDL_GL_SwapBuffers();
     SDL_Delay(time);
+    Mix_FreeMusic(music);
 }

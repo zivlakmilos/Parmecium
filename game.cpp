@@ -11,6 +11,7 @@ Game::Game(void)
     this->isRunning = true;
     this->fps = 10;
     this->player = new Player();
+    this->music = NULL;
 }
 
 Game::~Game(void)
