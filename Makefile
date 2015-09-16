@@ -2,7 +2,7 @@ all: linux windows
 
 
 linux: main.o game.o player.o splash.o
-	g++ -o parmecium main.o game.o player.o splash.o -lSDLmain -lSDL -lGL -lSDL_image -lSDL_mixer
+	g++ -o parmecium main.o game.o player.o splash.o -lSDLmain -lSDL -lGL -lSDL_image #-lSDL_mixer
 
 main.o: main.cpp
 	g++ -c -o main.o main.cpp
