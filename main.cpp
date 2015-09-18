@@ -3,6 +3,8 @@
 #include "splash.h"
 #include "game.h"
 
+// test komentar
+
 int main(int argc, char *argv[])
 {
     Game *game = new Game();
