@@ -1,9 +1,8 @@
 #include "main.h"
-#include "player.h"
 #include "splash.h"
+#include "tile.h"
+#include "player.h"
 #include "game.h"
-
-// test komentar
 
 int main(int argc, char *argv[])
 {

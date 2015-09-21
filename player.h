@@ -55,12 +55,15 @@ class Player
         void loadTexture(void);
         void render(void);
         void collision(float width, float height);
+        void collision(Tile *tile);
+        /*
         float getX(void);
         float getY(void);
         float getWidth(void);
         float getHeight(void);
         void setX(float value);
         void setY(float value);
+        */
 };
 
 #endif  // PLAYER_H

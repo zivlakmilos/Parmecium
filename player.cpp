@@ -1,4 +1,5 @@
 #include "main.h"
+#include "tile.h"
 #include "player.h"
 
 Player::Player(void)
@@ -32,7 +33,7 @@ void Player::move(void)
         this->y += this->speed;
         this->angle = PLAYER_ANGLE_UP;
     }
-    if(this->moveState.left)
+    else if(this->moveState.left)
     {
         this->x -= this->speed;
         this->angle = PLAYER_ANGLE_LEFT;
@@ -207,4 +208,39 @@ void Player::collision(float width, float height)
         this->y = 0;
     else if(this->y + this->height > height)
         this->y = height - this->height;
+}
+
+void Player::collision(Tile *tile)
+{
+    if(this->x + this->width > tile->getX() &&
+            this->x < tile->getX() + tile->getWidth())
+        if(this->y + this->height > tile->getY() &&
+                this->y < tile->getY() + tile->getHeight())
+        {
+            /*
+            if(this->moveState.down)
+                this->y = tile->getY() + tile->getHeight();
+            else if(this->moveState.right)
+                this->x = tile->getX() - this->width;
+            else if(this->moveState.up)
+                this->y = tile->getY() - this->height;
+            else if(this->moveState.left)
+                this->x = tile->getX() + tile->getWidth();
+            */
+            switch(this->angle)
+            {
+                case PLAYER_ANGLE_DOWN:
+                    this->y = tile->getY() + tile->getHeight();
+                    break;
+                case PLAYER_ANGLE_RIGHT:
+                    this->x = tile->getX() - this->width;
+                    break;
+                case PLAYER_ANGLE_UP:
+                    this->y = tile->getY() - this->height;
+                    break;
+                case PLAYER_ANGLE_LEFT:
+                    this->x = tile->getX() + tile->getWidth();
+                    break;
+            }
+        }
 }
