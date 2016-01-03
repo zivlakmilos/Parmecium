@@ -1,4 +1,6 @@
 #include "main.h"
+#include "splash.h"
+#include "tile.h"
 #include "player.h"
 #include "game.h"
 

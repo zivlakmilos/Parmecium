@@ -1,19 +1,30 @@
 #include "main.h"
+#include "splash.h"
+#include "tile.h"
 #include "player.h"
 #include "game.h"
 
 Game::Game(void)
 {
-    width = 840;
-    height = 680;
-    caption = "Parmecium";
-    isRunning = true;
-    fps = 10;
-    player = new Player();
+    this->width = 840;
+    this->height = 680;
+    this->caption = "Parmecium";
+    this->isRunning = true;
+    this->fps = 10;
+    this->player = new Player();
+    this->music = NULL;
 }
 
 Game::~Game(void)
 {
+    int i;
+
+    delete this->player;
+    for(i = 0; i < this->tile.size(); i++)
+    {
+        delete this->tile[i];
+    }
+
     // Free
     SDL_Quit();
 }
@@ -62,8 +73,48 @@ void Game::init(void)
     std::cout << "OpenGL is initialize\n";
 
     // Initialize texture
-    player->loadTexture();
+    this->player->loadTexture();
     std::cout << "texture is initialize\n";
+
+    // Load map
+    this->loadMap();
+    std::cout << "map is loaded\n";
+}
+
+void Game::splash(void)
+{
+    Splash *splash = new Splash(this->width, this->height);
+    splash->show();
+    delete splash;
+}
+
+void Game::loadMap(void)
+{
+    this->tile.push_back(new Tile(100, 100, 100, 100, TILE_TYPE_BLOCK));
+    this->tile.push_back(new Tile(200, 200, 100, 100, TILE_TYPE_BLOCK));
+}
+
+void Game::render(void)
+{
+    int i;
+
+    this->player->render();
+    for(i = 0; i < this->tile.size(); i++)
+    {
+        this->tile[i]->render();
+    }
+}
+
+void Game::logic(void)
+{
+    int i;
+
+    player->move();
+    player->collision(this->width, this->height);
+    for(i = 0; i < this->tile.size(); i++)
+    {
+        player->collision(tile[i]);
+    }
 }
 
 void Game::events(SDL_Event event)
@@ -123,6 +174,9 @@ void Game::mainLoop(void)
     // Initialization
     this->init();
 
+    // Splash screen
+    this->splash();
+
     // Main loop
     std::cout << "Main loop is started\n";
     while(isRunning)
@@ -131,15 +185,14 @@ void Game::mainLoop(void)
         this->events(event);
 
         // Logic
-        player->move();
-        player->collision(this->width, this->height);
+        this->logic();
 
         // Render
         glClear(GL_COLOR_BUFFER_BIT);
         glPushMatrix();
         glOrtho(0, this->width, 0, this->height, -1, 1);    // Set the matrix
         // Begin render
-        player->render();
+        this->render();
         // End render
         glPopMatrix();
         SDL_GL_SwapBuffers();

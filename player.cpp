@@ -1,4 +1,6 @@
 #include "main.h"
+#include "functions.h"
+#include "tile.h"
 #include "player.h"
 
 Player::Player(void)
@@ -32,7 +34,7 @@ void Player::move(void)
         this->y += this->speed;
         this->angle = PLAYER_ANGLE_UP;
     }
-    if(this->moveState.left)
+    else if(this->moveState.left)
     {
         this->x -= this->speed;
         this->angle = PLAYER_ANGLE_LEFT;
@@ -154,13 +156,13 @@ void Player::loadTexture(void)
     imageRect.h = 300;
 
     image = IMG_Load("data/foka.png");
-    this->texture.down = this->loadModel(image, imageRect);
+    this->texture.down = loadModel(image, imageRect);
     image = IMG_Load("data/foka2.png");
-    this->texture.right = this->loadModel(image, imageRect);
+    this->texture.right = loadModel(image, imageRect);
     image = IMG_Load("data/foka3.png");
-    this->texture.left = this->loadModel(image, imageRect);
+    this->texture.left = loadModel(image, imageRect);
     image = IMG_Load("data/foka4.png");
-    this->texture.up = this->loadModel(image, imageRect);
+    this->texture.up = loadModel(image, imageRect);
 
     SDL_FreeSurface(image);
 }
@@ -207,4 +209,39 @@ void Player::collision(float width, float height)
         this->y = 0;
     else if(this->y + this->height > height)
         this->y = height - this->height;
+}
+
+void Player::collision(Tile *tile)
+{
+    if(this->x + this->width > tile->getX() &&
+            this->x < tile->getX() + tile->getWidth())
+        if(this->y + this->height > tile->getY() &&
+                this->y < tile->getY() + tile->getHeight())
+        {
+            /*
+            if(this->moveState.down)
+                this->y = tile->getY() + tile->getHeight();
+            else if(this->moveState.right)
+                this->x = tile->getX() - this->width;
+            else if(this->moveState.up)
+                this->y = tile->getY() - this->height;
+            else if(this->moveState.left)
+                this->x = tile->getX() + tile->getWidth();
+            */
+            switch(this->angle)
+            {
+                case PLAYER_ANGLE_DOWN:
+                    this->y = tile->getY() + tile->getHeight();
+                    break;
+                case PLAYER_ANGLE_RIGHT:
+                    this->x = tile->getX() - this->width;
+                    break;
+                case PLAYER_ANGLE_UP:
+                    this->y = tile->getY() - this->height;
+                    break;
+                case PLAYER_ANGLE_LEFT:
+                    this->x = tile->getX() + tile->getWidth();
+                    break;
+            }
+        }
 }
