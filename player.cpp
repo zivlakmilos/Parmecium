@@ -1,4 +1,5 @@
 #include "main.h"
+#include "functions.h"
 #include "tile.h"
 #include "player.h"
 
@@ -155,13 +156,13 @@ void Player::loadTexture(void)
     imageRect.h = 300;
 
     image = IMG_Load("data/foka.png");
-    this->texture.down = this->loadModel(image, imageRect);
+    this->texture.down = loadModel(image, imageRect);
     image = IMG_Load("data/foka2.png");
-    this->texture.right = this->loadModel(image, imageRect);
+    this->texture.right = loadModel(image, imageRect);
     image = IMG_Load("data/foka3.png");
-    this->texture.left = this->loadModel(image, imageRect);
+    this->texture.left = loadModel(image, imageRect);
     image = IMG_Load("data/foka4.png");
-    this->texture.up = this->loadModel(image, imageRect);
+    this->texture.up = loadModel(image, imageRect);
 
     SDL_FreeSurface(image);
 }
