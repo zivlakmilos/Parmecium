@@ -1,7 +1,7 @@
 #include "main.h"
 #include "functions.h"
 
-unsigned int Player::loadModel(SDL_Surface *image, SDL_Rect imageRect)
+unsigned int loadModel(SDL_Surface *image, SDL_Rect imageRect)
 {
     SDL_Surface *tmpImage;  // Tempoary surface
     tmpImage = SDL_CreateRGBSurface(0, imageRect.w, imageRect.h,

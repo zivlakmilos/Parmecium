@@ -51,7 +51,6 @@ class Player
         ~Player(void);
         void move(void);
         void changeMoveState(int type, int size);
-        unsigned int loadModel(SDL_Surface *image, SDL_Rect imageRect);
         void loadTexture(void);
         void render(void);
         void collision(float width, float height);
